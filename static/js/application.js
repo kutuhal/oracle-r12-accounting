@@ -11,3 +11,7 @@ $("#form_filter").submit(function() {
         return true;
       }
     });
+
+$( document ).ready(function() {
+  ga('send', 'pageview', location.pathname);        
+    });
