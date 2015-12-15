@@ -26,6 +26,19 @@ def p2p_accounting(request):
 
             period_end_accrual_val = form.cleaned_data ['period_end_accrual']
             allow_recon_accounting = form.cleaned_data ['allow_recon_accounting']
+            # setting period end accrual as a Boolean
+            if  period_end_accrual_val== 'True':
+                period_end_accrual_val = True
+            else:
+                period_end_accrual_val = False
+
+            # setting allow recon accounting as a Boolean
+            if  allow_recon_accounting == 'True':
+                allow_recon_accounting  = True
+            else:
+                allow_recon_accounting  = False
+
+
         else:
             #this is fallback and usually not used since we are using 'Choices' in our form
             item_type_val ='Expense'
