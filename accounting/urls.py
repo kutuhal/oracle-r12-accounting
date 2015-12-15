@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from django.views.generic import TemplateView
 
 """mysite URL Configuration
 
@@ -31,5 +32,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
+    url(r'^$', TemplateView.as_view(template_name="home.html"), name='home'),
     url(r'^admin/', include(admin.site.urls)),
 ]
