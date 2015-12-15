@@ -13,18 +13,43 @@
 # limitations under the License.
 
 from django.shortcuts import render
+from p2p.forms import P2PForm
 
 # Create your views here.
 # Create your views here.
 def p2p_accounting(request):
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = P2PForm(request.POST)
+        if form.is_valid(): # All validation rules pass
+            item_type_val = form.cleaned_data ['item_type']
+
+            period_end_accrual_val = form.cleaned_data ['period_end_accrual']
+            allow_recon_accounting = form.cleaned_data ['allow_recon_accounting']
+        else:
+            #this is fallback and usually not used since we are using 'Choices' in our form
+            item_type_val ='Expense'
+            allow_recon_accounting = False
+            period_end_accrual_val =False
+    else:
+        #Initial load when the request != POST (e.g. GET)
+        form=P2PForm()
+        #setting form variables to default values for a != POST (e.g. GET request)
+        item_type_val ='Expense'
+        period_end_accrual_val =False
+        allow_recon_accounting = False
+
+    print(period_end_accrual_val)
     receipt_accting=  (d for d in p2p_accting_list if (d['item_type']=='Expense' and d['accounting_entry']=='PO Receipt' ) )
     deliver_accting = (d for d in p2p_accting_list  if (d['item_type']=='Expense' and d['accounting_entry']=='PO Deliver' ) )
     invoice_accting = (d for d in p2p_accting_list if (d['accounting_entry']=='AP Invoice' ) )
     payment_accting = (d for d in p2p_accting_list  if (d['accounting_entry']=='AP Payment' ) )
+    recon_accting = (d for d in p2p_accting_list  if (d['accounting_entry']=='AP Payment Reco' ) )
      #list_accounting =  (d for d in list_accounting_expense if d['accounting_entry']=='PO Receipt' )
     return render(request, 'p2p/p2p_accounting.html',
         {'po_receipt_accting': receipt_accting, 'po_deliver_accting' : deliver_accting,
-        'ap_invoice_accting':invoice_accting, 'ap_payment_accting':payment_accting})
+        'ap_invoice_accting':invoice_accting, 'ap_payment_accting':payment_accting,
+        'ap_payment_recon_accting': recon_accting,'form': form})
 
 
 
