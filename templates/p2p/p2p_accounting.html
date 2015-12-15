@@ -13,7 +13,11 @@
             <p> </p>
         </form>
         </div>
-   
+                    {%  comment%}
+                        # Render form manually - label and the field
+                        {{ form.period_end_accrual.label_tag }}
+                        {{form.period_end_accrual}}
+                    {%endcomment %}
     {% endblock %}
 
 
