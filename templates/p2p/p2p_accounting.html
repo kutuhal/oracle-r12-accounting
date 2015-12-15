@@ -7,7 +7,7 @@
         <div>
          <form id = 'form_filter' class="form-horizontal" method="post" action="/p2p_accounting/?">
             {% csrf_token %} {{form.item_type.choices}}
-            {{form}}  <br> 
+            {{form}}  <br>
             <div id = 'error_message'> </div>
             <input type="submit" class =' btn btn-primary' name="submit" value="Submit" />
             <p> </p>
@@ -40,29 +40,29 @@
         </div>
      </div>
     <div id = 'options'>
-        
+
     </div>
 
     <div id = 'main-container'>
-        
+
         <div id = 'accounting_enty'>
             <div id = 'header'> </div>
             <div id = 'entry'>
                 <div class="panel panel-primary">
-                
+
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h3 class="panel-title">PO Receipt</h3>
                         </div>
                         <table class="table table-bordered table-hover">
-                            {% if po_receipt_accting%} 
+                            {% if po_receipt_accting%}
                                 {% include "p2p/p2p_accting_header.html"%}
-                            
+
                                 {% for entry in po_receipt_accting %}
                                     {% include "p2p/p2p_accting_entry.html"%}
                                 {% endfor %}
-                            {%else%} 
-                                {% include "no_accounting.html" %}  
+                            {%else%}
+                                {% include "no_accounting.html" %}
                             {%endif%}
                         </table>
                     </div>
@@ -71,13 +71,13 @@
                             <h3 class="panel-title">PO Deliver</h3>
                         </div>
                         <table class="table table-bordered table-hover">
-                            {% if po_receipt_accting%} 
+                            {% if po_receipt_accting%}
                                 {% include "p2p/p2p_accting_header.html"%}
                                 {% for entry in po_deliver_accting %}
                                     {% include "p2p/p2p_accting_entry.html"%}
                                 {% endfor %}
-                            {%else%} 
-                                {% include "no_accounting.html" %}  
+                            {%else%}
+                                {% include "no_accounting.html" %}
                             {%endif%}
                         </table>
                     </div>
@@ -108,18 +108,18 @@
                             <h3 class="panel-title">AP Payment Reconciliation</h3>
                         </div>
                         <table class="table table-bordered table-hover">
-                            {% if ap_payment_recon_accting%} 
+                            {% if ap_payment_recon_accting%}
                                 {% include "p2p/p2p_accting_header.html"%}
                                         {% for entry in ap_payment_recon_accting %}
                                                                     {% include "p2p/p2p_accting_entry.html"%}
                                         {% endfor %}
-                            {%else%} 
-                                {% include "no_accounting.html" %}  
+                            {%else%}
+                                {% include "no_accounting.html" %}
                             {%endif%}
                         </table>
                     </div>
                 </div>
-                </div>  
+                </div>
             </div>  <!-- id =accounting_entry-->
     </div>
 {% endblock %}
