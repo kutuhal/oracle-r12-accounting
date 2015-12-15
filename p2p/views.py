@@ -40,7 +40,7 @@ def p2p_accounting(request):
         allow_recon_accounting = False
 
     print(period_end_accrual_val)
-    receipt_accting=  (field for field in p2p_accting_list if ( field['accounting_entry']=='PO Receipt' and
+    receipt_accting=  tuple(field for field in p2p_accting_list if ( field['accounting_entry']=='PO Receipt' and
                                                             field['item_type']==item_type_val and
                                                             field['period_end_accrual']== period_end_accrual_val
                                                             ) )
@@ -53,7 +53,7 @@ def p2p_accounting(request):
     payment_accting = (field for field in p2p_accting_list  if (field['accounting_entry']=='AP Payment' and
                                                             field ['allow_recon_accounting']==allow_recon_accounting
                                                             ) )
-    recon_accting = (field for field in p2p_accting_list  if (field['accounting_entry']=='AP Payment Reco' and
+    recon_accting = tuple(field for field in p2p_accting_list  if (field['accounting_entry']=='AP Payment Reco' and
                                                             field ['allow_recon_accounting']==allow_recon_accounting
                                                             ) )
      #list_accounting =  (d for d in list_accounting_expense if d['accounting_entry']=='PO Receipt' )
